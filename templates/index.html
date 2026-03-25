@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block description %}
+Professional Tax Consultant and Advocate in Jamshedpur.
+Expert in Income Tax, GST Filing, and Legal Advisory Services.
+Call today for a free consultation.
+{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+    <div class="hero-text">
+        <h1>Expert Tax &amp; Legal Services in Jamshedpur</h1>
+        <p class="hero-subtitle">
+            Trusted Tax Consultant and Advocate with years of experience.
+            Helping individuals and businesses with Income Tax, GST, and Legal matters.
+        </p>
+        <a href="{{ url_for('contact') }}" class="btn-primary">
+            Book a Free Consultation
+        </a>
+    </div>
+</section>
+
+<section class="intro section-pad">
+    <h2>Why Choose Us?</h2>
+    <div class="features-grid">
+        <div class="feature-card">
+            <h3>Income Tax Filing</h3>
+            <p>Accurate and timely filing for salaried individuals, businesses,
+               and NRIs. Maximise your refunds legally.</p>
+        </div>
+        <div class="feature-card">
+            <h3>GST Registration &amp; Returns</h3>
+            <p>Complete GST compliance for your business. Registration,
+               monthly/quarterly returns, and audit support.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Legal Advisory</h3>
+            <p>Professional legal advice on taxation disputes, appeals before
+               Income Tax Appellate Tribunal (ITAT), and more.</p>
+        </div>
+    </div>
+</section>
+
+<section class="cta section-pad">
+    <h2>Ready to Simplify Your Taxes?</h2>
+    <p>Located in Jamshedpur. Serving clients across Jharkhand.</p>
+    <a href="{{ url_for('contact') }}" class="btn-primary">Get in Touch Today</a>
+</section>
+
+{% endblock %}

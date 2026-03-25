@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Tax Consultant{% endblock %} | Jamshedpur</title>
+    <meta name="description" content="{% block description %}Expert Tax Consultant and Advocate in Jamshedpur. Specialising in Income Tax, GST, and Legal Services.{% endblock %}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="{{ url_for('index') }}">Your Father's Name</a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('about') }}">About</a></li>
+            <li><a href="{{ url_for('services') }}">Services</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact</a></li>
+        </ul>
+    </nav>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p><strong>Your Father's Name</strong> — Tax Consultant &amp; Advocate</p>
+            <p>📍 Jamshedpur, Jharkhand &nbsp;|&nbsp; 📞 +91-XXXXXXXXXX &nbsp;|&nbsp; ✉️ email@example.com</p>
+            <p class="footer-copy">&copy; 2025 Your Father's Name. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
