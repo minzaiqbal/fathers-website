@@ -1,182 +1,134 @@
 {% extends "base.html" %}
 
-{% block title %}Contact Us - Tax Consultant & Advocate{% endblock %}
+{% block title %}Contact — Adv. Zafar Iqbal{% endblock %}
 
 {% block content %}
 
 <!-- Page Header -->
 <section style="background: linear-gradient(135deg, #1a3c5e, #2d6a9f); color: white; padding: 60px 20px; text-align: center;">
-  <div style="max-width: 800px; margin: 0 auto;">
-    <h1 style="font-size: 2.5rem; margin-bottom: 10px;">Contact Us</h1>
-    <p style="font-size: 1.1rem; opacity: 0.9;">We are based in Jamshedpur — reach out anytime for a consultation</p>
-  </div>
+    <div style="max-width: 800px; margin: 0 auto;">
+        <h1 style="font-size: 2.5rem; margin-bottom: 10px;">Contact Us</h1>
+        <p style="font-size: 1.1rem; opacity: 0.9;">Get in touch for a consultation — we're here to help</p>
+    </div>
 </section>
 
 <!-- Contact Info + Form -->
-<section style="padding: 60px 20px; background: #f9f9f9;">
-  <div style="max-width: 1000px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 40px;">
+<section style="padding: 60px 20px; max-width: 1100px; margin: 0 auto;">
+    <div style="display: flex; flex-wrap: wrap; gap: 40px;">
 
-    <!-- Left: Contact Details -->
-    <div style="flex: 1; min-width: 260px;">
-      <h3 style="color: #1a3c5e; font-size: 1.5rem; margin-bottom: 24px;">Get In Touch</h3>
+        <!-- Left: Contact Details -->
+        <div style="flex: 1; min-width: 280px;">
+            <h2 style="color: #1a3c5e; margin-bottom: 25px;">Get In Touch</h2>
 
-      <!-- Address -->
-      <div style="display: flex; gap: 16px; margin-bottom: 28px; align-items: flex-start;">
-        <span style="font-size: 1.8rem;">📍</span>
-        <div>
-          <h4 style="color: #1a3c5e; margin-bottom: 6px;">A/5 Iqra Complex, Main Road Ranchi - 834001 </h4>
-          <p style="color: #555; line-height: 1.7;">
-            [Your Father's Office Address]<br>
-            Jamshedpur, Jharkhand<br>
-            India — 831001
-          </p>
+            <div style="margin-bottom: 25px;">
+                <h3 style="color: #2d6a9f; margin-bottom: 6px;">📍 Office Address</h3>
+                <p style="color: #444; line-height: 1.7;">A/5 Iqra Complex, Main Road<br>Ranchi – 834001<br>Jharkhand, India</p>
+            </div>
+
+            <div style="margin-bottom: 25px;">
+                <h3 style="color: #2d6a9f; margin-bottom: 6px;">📞 Phone</h3>
+                <p style="color: #444;"><a href="tel:+919835167520" style="color: #444; text-decoration: none;">+91 98351 67520</a></p>
+            </div>
+
+            <div style="margin-bottom: 25px;">
+                <h3 style="color: #2d6a9f; margin-bottom: 6px;">💬 WhatsApp</h3>
+                <p style="color: #444;">
+                    <a href="https://wa.me/919835167520" target="_blank" style="color: #25D366; font-weight: 600; text-decoration: none;">
+                        Chat on WhatsApp →
+                    </a>
+                </p>
+            </div>
+
+            <div style="margin-bottom: 25px;">
+                <h3 style="color: #2d6a9f; margin-bottom: 6px;">📧 Email</h3>
+                <p style="color: #444;"><a href="mailto:adv.zafariqbalandtaxes@gmail.com" style="color: #444; text-decoration: none;">adv.zafariqbalandtaxes@gmail.com</a></p>
+            </div>
+
+            <div style="margin-bottom: 25px;">
+                <h3 style="color: #2d6a9f; margin-bottom: 6px;">🕐 Office Hours</h3>
+                <p style="color: #444; line-height: 1.7;">
+                    Monday – Saturday: 10:00 AM – 6:00 PM<br>
+                    Sunday: Closed
+                </p>
+            </div>
         </div>
-      </div>
 
-      <!-- Phone -->
-      <div style="display: flex; gap: 16px; margin-bottom: 28px; align-items: flex-start;">
-        <span style="font-size: 1.8rem;">📞</span>
-        <div>
-          <h4 style="color: #1a3c5e; margin-bottom: 6px;">Phone</h4>
-          <p style="color: #555; line-height: 1.7;">
-            <a href="tel:+91XXXXXXXXXX" style="color: #2d6a9f; text-decoration: none;">+91 XXXXX XXXXX</a><br>
-            <span style="font-size: 0.9rem; color: #888;">Mon – Sat, 10:00 AM to 6:00 PM</span>
-          </p>
+        <!-- Right: Contact Form -->
+        <div style="flex: 2; min-width: 300px;">
+            <h2 style="color: #1a3c5e; margin-bottom: 25px;">Send Us a Message</h2>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div style="padding: 15px; border-radius: 8px; margin-bottom: 20px;
+                            background: {% if category == 'success' %}#d4edda{% else %}#f8d7da{% endif %};
+                            color: {% if category == 'success' %}#155724{% else %}#721c24{% endif %};">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <form method="POST" action="/contact">
+                <div style="margin-bottom: 18px;">
+                    <label style="display: block; color: #333; font-weight: 600; margin-bottom: 6px;">Your Name *</label>
+                    <input type="text" name="name" required placeholder="e.g. Rahul Sharma"
+                        style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 1rem; box-sizing: border-box;">
+                </div>
+
+                <div style="margin-bottom: 18px;">
+                    <label style="display: block; color: #333; font-weight: 600; margin-bottom: 6px;">Email Address *</label>
+                    <input type="email" name="email" required placeholder="e.g. rahul@gmail.com"
+                        style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 1rem; box-sizing: border-box;">
+                </div>
+
+                <div style="margin-bottom: 18px;">
+                    <label style="display: block; color: #333; font-weight: 600; margin-bottom: 6px;">Phone Number</label>
+                    <input type="tel" name="phone" placeholder="e.g. +91 98765 43210"
+                        style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 1rem; box-sizing: border-box;">
+                </div>
+
+                <div style="margin-bottom: 18px;">
+                    <label style style="display: block; color: #333; font-weight: 600; margin-bottom: 6px;">Service Needed</label>
+                    <select name="service"
+                        style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 1rem; box-sizing: border-box; background: white;">
+                        <option value="">-- Select a Service --</option>
+                        <option value="Income Tax">Income Tax Filing</option>
+                        <option value="GST">GST Registration / Returns</option>
+                        <option value="Legal">Legal Consultation</option>
+                        <option value="Business">Business Registration</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div style="margin-bottom: 22px;">
+                    <label style="display: block; color: #333; font-weight: 600; margin-bottom: 6px;">Your Message *</label>
+                    <textarea name="message" required rows="5" placeholder="Describe your query..."
+                        style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 1rem; box-sizing: border-box; resize: vertical;"></textarea>
+                </div>
+
+                <button type="submit"
+                    style="background: #2d6a9f; color: white; padding: 14px 35px; border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; width: 100%;">
+                    Send Message →
+                </button>
+            </form>
         </div>
-      </div>
-
-      <!-- Email -->
-      <div style="display: flex; gap: 16px; margin-bottom: 28px; align-items: flex-start;">
-        <span style="font-size: 1.8rem;">✉️</span>
-        <div>
-          <h4 style="color: #1a3c5e; margin-bottom: 6px;">Email</h4>
-          <p style="color: #555; line-height: 1.7;">
-            <a href="mailto:your@email.com" style="color: #2d6a9f; text-decoration: none;">your@email.com</a><br>
-            <span style="font-size: 0.9rem; color: #888;">We reply within 24 hours</span>
-          </p>
-        </div>
-      </div>
-
-      <!-- WhatsApp -->
-      <div style="display: flex; gap: 16px; margin-bottom: 28px; align-items: flex-start;">
-        <span style="font-size: 1.8rem;">💬</span>
-        <div>
-          <h4 style="color: #1a3c5e; margin-bottom: 6px;">WhatsApp</h4>
-          <p style="color: #555; line-height: 1.7;">
-            <a href="https://wa.me/91XXXXXXXXXX" target="_blank" style="color: #2d6a9f; text-decoration: none;">Message us on WhatsApp</a><br>
-            <span style="font-size: 0.9rem; color: #888;">Quick responses during office hours</span>
-          </p>
-        </div>
-      </div>
-
-      <!-- Office Hours -->
-      <div style="background: #e8f0fb; border-radius: 8px; padding: 20px; margin-top: 10px;">
-        <h4 style="color: #1a3c5e; margin-bottom: 12px;">🕐 Office Hours</h4>
-        <table style="width: 100%; color: #555; font-size: 0.95rem; border-collapse: collapse;">
-          <tr>
-            <td style="padding: 5px 0;">Monday – Friday</td>
-            <td style="padding: 5px 0; text-align: right;">10:00 AM – 6:00 PM</td>
-          </tr>
-          <tr>
-            <td style="padding: 5px 0;">Saturday</td>
-            <td style="padding: 5px 0; text-align: right;">10:00 AM – 2:00 PM</td>
-          </tr>
-          <tr>
-            <td style="padding: 5px 0; color: #e05555;">Sunday</td>
-            <td style="padding: 5px 0; text-align: right; color: #e05555;">Closed</td>
-          </tr>
-        </table>
-      </div>
 
     </div>
-
-    <!-- Right: Contact Form -->
-    <div style="flex: 1.4; min-width: 280px;">
-      <div style="background: white; border-radius: 12px; padding: 36px; box-shadow: 0 4px 16px rgba(0,0,0,0.08);">
-        <h3 style="color: #1a3c5e; font-size: 1.5rem; margin-bottom: 24px;">Send Us a Message</h3>
-
-        {% with messages = get_flashed_messages(with_categories=true) %}
-          {% if messages %}
-            {% for category, message in messages %}
-              <div style="padding: 12px 16px; border-radius: 6px; margin-bottom: 20px;
-                background: {% if category == 'success' %}#e6f9ee{% else %}#fdecea{% endif %};
-                color: {% if category == 'success' %}#1a7a3c{% else %}#c0392b{% endif %};
-                border: 1px solid {% if category == 'success' %}#a8e6bf{% else %}#f5c6cb{% endif %};">
-                {{ message }}
-              </div>
-            {% endfor %}
-          {% endif %}
-        {% endwith %}
-
-        <form action="/contact" method="POST">
-
-          <!-- Name -->
-          <div style="margin-bottom: 20px;">
-            <label style="display: block; color: #333; font-weight: bold; margin-bottom: 6px;">Full Name <span style="color: red;">*</span></label>
-            <input type="text" name="name" required placeholder="e.g. Ramesh Kumar"
-              style="width: 100%; padding: 12px 14px; border: 1px solid #ccc; border-radius: 6px; font-size: 1rem; box-sizing: border-box; outline: none;">
-          </div>
-
-          <!-- Phone -->
-          <div style="margin-bottom: 20px;">
-            <label style="display: block; color: #333; font-weight: bold; margin-bottom: 6px;">+91-9835167520<span style="color: red;">*</span></label>
-            <input type="tel" name="phone" required placeholder="e.g. 98765 43210"
-              style="width: 100%; padding: 12px 14px; border: 1px solid #ccc; border-radius: 6px; font-size: 1rem; box-sizing: border-box; outline: none;">
-          </div>
-
-          <!-- Email -->
-          <div style="margin-bottom: 20px;">
-            <label style="display: block; color: #333; font-weight: bold; margin-bottom: 6px;">Email Address</label>
-            <input type="email" name="email" placeholder="zafariqbaltaxati@gmail.com"
-              style="width: 100%; padding: 12px 14px; border: 1px solid #ccc; border-radius: 6px; font-size: 1rem; box-sizing: border-box; outline: none;">
-          </div>
-
-          <!-- Service -->
-          <div style="margin-bottom: 20px;">
-            <label style="display: block; color: #333; font-weight: bold; margin-bottom: 6px;">Service Required</label>
-            <select name="service"
-              style="width: 100%; padding: 12px 14px; border: 1px solid #ccc; border-radius: 6px; font-size: 1rem; box-sizing: border-box; background: white; outline: none;">
-              <option value="">-- Select a Service --</option>
-              <option value="itr">ITR Filing</option>
-              <option value="tax_planning">Tax Planning</option>
-              <option value="gst_registration">GST Registration</option>
-              <option value="gst_returns">GST Return Filing</option>
-              <option value="notice">Tax / GST Notice Handling</option>
-              <option value="legal">Legal Advisory</option>
-              <option value="pan_tan">PAN / TAN Application</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-
-          <!-- Message -->
-          <div style="margin-bottom: 24px;">
-            <label style="display: block; color: #333; font-weight: bold; margin-bottom: 6px;">Your Message <span style="color: red;">*</span></label>
-            <textarea name="message" required rows="4" placeholder="Briefly describe what you need help with..."
-              style="width: 100%; padding: 12px 14px; border: 1px solid #ccc; border-radius: 6px; font-size: 1rem; box-sizing: border-box; resize: vertical; outline: none;"></textarea>
-          </div>
-
-          <!-- Submit -->
-          <button type="submit"
-            style="width: 100%; background: #1a3c5e; color: white; padding: 14px; border: none; border-radius: 6px; font-size: 1.05rem; font-weight: bold; cursor: pointer;">
-            Send Message ✉️
-          </button>
-
-        </form>
-      </div>
-    </div>
-
-  </div>
 </section>
 
-
-<!-- Map Placeholder -->
-<section style="padding: 0; background: #e8edf2;">
-  <div style="max-width: 1000px; margin: 0 auto; padding: 40px 20px;">
-    <h3 style="color: #1a3c5e; margin-bottom: 16px; font-size: 1.4rem;">📍 Find Us in Jamshedpur</h3>
-    <div style="background: #d0dce8; border-radius: 10px; height: 220px; display: flex; align-items: center; justify-content: center; color: #555; font-size: 1rem;">
-      🗺️ Google Map will be embedded here — coming soon
+<!-- Map Section -->
+<section style="padding: 0 0 60px 0;">
+    <div style="max-width: 1100px; margin: 0 auto; padding: 0 20px;">
+        <h2 style="color: #1a3c5e; margin-bottom: 20px; text-align: center;">Find Our Office</h2>
+        <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.1);">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3662.5!2d85.3096!3d23.3441!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sMain+Road+Ranchi!5e0!3m2!1sen!2sin!4v1"
+                width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
     </div>
-  </div>
 </section>
 
 {% endblock %}
