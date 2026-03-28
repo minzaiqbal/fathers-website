@@ -1,47 +1,196 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Tax Consultant{% endblock %} | Jamshedpur</title>
-    <meta name="description" content="{% block description %}Expert Tax Consultant and Advocate in Jamshedpur. Specialising in Income Tax, GST, and Legal Services.{% endblock %}">
+    <title>{% block title %}Adv. Zafar Iqbal — Tax Consultant & Advocate{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; color: #222; background: #fff; }
 
+        /* ── NAVBAR ── */
+        .navbar {
+            background: #0a1f3c;
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+            height: 68px;
+        }
+        .navbar-brand {
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+        }
+        .navbar-brand .name {
+            color: #ffffff;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+        .navbar-brand .tagline {
+            color: #7eb3e8;
+            font-size: 0.72rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+        .navbar-links {
+            display: flex;
+            gap: 6px;
+            list-style: none;
+        }
+        .navbar-links a {
+            color: #ccdff5;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            letter-spacing: 0.2px;
+        }
+        .navbar-links a:hover {
+            background: #1a3f6f;
+            color: #ffffff;
+        }
+        .navbar-links a.active {
+            background: #1e5ca8;
+            color: #ffffff;
+        }
+
+        /* ── FOOTER ── */
+        .footer {
+            background: #0a1f3c;
+            color: #ccdff5;
+            padding: 50px 40px 25px;
+            margin-top: 60px;
+        }
+        .footer-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            max-width: 1100px;
+            margin: 0 auto 35px;
+        }
+        .footer-col { flex: 1; min-width: 200px; }
+        .footer-col h3 {
+            color: #ffffff;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #1e5ca8;
+            display: inline-block;
+        }
+        .footer-col p, .footer-col a {
+            color: #a8c5e5;
+            font-size: 0.88rem;
+            line-height: 1.9;
+            text-decoration: none;
+            display: block;
+        }
+        .footer-col a:hover { color: #ffffff; }
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid #1a3a5c;
+            padding-top: 20px;
+            color: #6a90b5;
+            font-size: 0.82rem;
+        }
+        .footer-bottom span { color: #e05c5c; }
+
+        /* ── FLASH MESSAGES ── */
+        .flash-container { max-width: 1100px; margin: 20px auto; padding: 0 20px; }
+        .flash-success {
+            background: #d4edda; color: #155724;
+            padding: 14px 20px; border-radius: 8px;
+            border-left: 4px solid #28a745; font-size: 0.95rem;
+        }
+        .flash-danger {
+            background: #f8d7da; color: #721c24;
+            padding: 14px 20px; border-radius: 8px;
+            border-left: 4px solid #dc3545; font-size: 0.95rem;
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 768px) {
+            .navbar { padding: 0 20px; flex-wrap: wrap; height: auto; padding: 15px 20px; }
+            .navbar-links { gap: 2px; flex-wrap: wrap; }
+            .navbar-links a { font-size: 0.82rem; padding: 6px 10px; }
+            .footer { padding: 40px 20px 20px; }
+        }
+    </style>
+</head>
 <body>
 
-    <nav class="navbar">
-        <div class="nav-brand">
-            <a href="{{ url_for('index') }}">Your Father's Name</a>
-        </div>
-        <ul class="nav-links">
-            <li><a href="{{ url_for('index') }}">Home</a></li>
-            <li><a href="{{ url_for('about') }}">About</a></li>
-            <li><a href="{{ url_for('services') }}">Services</a></li>
-            <li><a href="{{ url_for('contact') }}">Contact</a></li>
-        </ul>
-    </nav>
+<!-- NAVBAR -->
+<nav class="navbar">
+    <a href="/" class="navbar-brand">
+        <span class="name">Adv. Zafar Iqbal</span>
+        <span class="tagline">Tax Consultant & Advocate, Ranchi</span>
+    </a>
+    <ul class="navbar-links">
+        <li><a href="/" class="{{ 'active' if request.path == '/' }}">Home</a></li>
+        <li><a href="/about" class="{{ 'active' if request.path == '/about' }}">About</a></li>
+        <li><a href="/services" class="{{ 'active' if request.path == '/services' }}">Services</a></li>
+        <li><a href="/contact" class="{{ 'active' if request.path == '/contact' }}">Contact</a></li>
+    </ul>
+</nav>
 
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
+<!-- FLASH MESSAGES -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div class="flash-container">
             {% for category, message in messages %}
-                <div class="alert alert-{{ category }}">{{ message }}</div>
+                <div class="flash-{{ category }}">{{ message }}</div>
             {% endfor %}
-        {% endif %}
-    {% endwith %}
-
-    <main class="main-content">
-        {% block content %}{% endblock %}
-    </main>
-
-    <footer class="footer">
-        <div class="footer-content">
-            <p><strong>Your Father's Name</strong> — Tax Consultant &amp; Advocate</p>
-            <p>📍 Jamshedpur, Jharkhand &nbsp;|&nbsp; 📞 +91-XXXXXXXXXX &nbsp;|&nbsp; ✉️ email@example.com</p>
-            <p class="footer-copy">&copy; 2025 Your Father's Name. All rights reserved.</p>
         </div>
-    </footer>
+    {% endif %}
+{% endwith %}
+
+<!-- PAGE CONTENT -->
+{% block content %}{% endblock %}
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="footer-grid">
+        <div class="footer-col">
+            <h3>Adv. Zafar Iqbal</h3>
+            <p>Qualified Tax Consultant & Advocate with 15+ years of experience in Ranchi, Jharkhand.</p>
+            <p style="margin-top: 10px;">B.Com, LLB — Chotanagpur Law College</p>
+        </div>
+        <div class="footer-col">
+            <h3>Quick Links</h3>
+            <a href="/">Home</a>
+            <a href="/about">About</a>
+            <a href="/services">Services</a>
+            <a href="/contact">Contact</a>
+        </div>
+        <div class="footer-col">
+            <h3>Services</h3>
+            <a href="/services">Income Tax Filing</a>
+            <a href="/services">GST Registration & Returns</a>
+            <a href="/services">Legal Consultation</a>
+            <a href="/services">Business Registration</a>
+        </div>
+        <div class="footer-col">
+            <h3>Contact</h3>
+            <p>📍 A/5 Iqra Complex, Main Road<br>Ranchi – 834001, Jharkhand</p>
+            <a href="tel:+919835167520" style="margin-top:8px;">📞 +91 98351 67520</a>
+            <a href="https://wa.me/919835167520" target="_blank">💬 WhatsApp</a>
+            <a href="mailto:adv.zafariqbalandtaxes@gmail.com">✉️ Email Us</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2025 Adv. Zafar Iqbal — Tax Consultant & Advocate, Ranchi. All rights reserved. Made with <span>♥</span> in Jharkhand.</p>
+    </div>
+</footer>
 
 </body>
 </html>
