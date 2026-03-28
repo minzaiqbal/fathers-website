@@ -1,11 +1,20 @@
 from flask import Flask, render_template, request, flash, redirect, url_for
-import os
+from flask_mail import Mail, Message
 from dotenv import load_dotenv
+import os
 
 load_dotenv()
 
 app = Flask(__name__)
-app.secret_key = os.getenv('SECRET_KEY', 'dev-secret-key-123')
+app.secret_key = os.getenv('SECRET_KEY')
+
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
+
+mail = Mail(app)
 
 @app.route('/')
 def index():
@@ -22,12 +31,36 @@ def services():
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
     if request.method == 'POST':
-        name    = request.form.get('name')
-        email   = request.form.get('email')
-        message = request.form.get('message')
-        print(f"New enquiry from {name} ({email}): {message}")
-        flash('Thank you! We will contact you shortly.', 'success')
+        name = request.form.get('name')
+        email = request.form.get('email')
+        phone = request.form.get('phone')
+        subject = request.form.get('subject')
+        message_body = request.form.get('message')
+
+        try:
+            msg = Message(
+                subject=f"New Enquiry: {subject}",
+                sender=os.getenv('MAIL_USERNAME'),
+                recipients=[os.getenv('RECIPIENT_EMAIL')]
+            )
+            msg.body = f"""
+You have received a new enquiry from your website.
+
+Name    : {name}
+Email   : {email}
+Phone   : {phone}
+Subject : {subject}
+
+Message:
+{message_body}
+"""
+            mail.send(msg)
+            flash('Your message has been sent successfully! We will contact you soon.', 'success')
+        except Exception as e:
+            flash('Sorry, there was an error sending your message. Please try again.', 'danger')
+
         return redirect(url_for('contact'))
+
     return render_template('contact.html')
 
 if __name__ == '__main__':
